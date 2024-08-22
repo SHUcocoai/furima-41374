@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column           | Type   | Options     |
-| ---------------- | ------ | ----------- |
-| nickname         | string | null: false |
-| email            | string | null: false, unique: true |
-| confirm_password | string | null: false |
-| last_name        | string | null: false |
-| first_name       | string | null: false |
-| last_name_kana   | string | null: false |
-| first_name_kana  | string | null: false |
-| birth_date       | date   | null: false |
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
+| last_name_kana     | string | null: false |
+| first_name_kana    | string | null: false |
+| birth_date         | date   | null: false |
 
 ### Association
 
@@ -48,7 +48,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :shipping_address
+- has_one :shipping_address
 
 ## shipping_addresses テーブル
 
@@ -58,10 +58,9 @@
 | prefecture_id | integer    | null: false |
 | city          | string     | null: false |
 | street_address| string     | null: false |
-| building_name | string     | null: false |
+| building_name | string     |             |
 | phone_number  | string     | null: false |
-| user          | references | null: false, foreign_key: true |
-| item          | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
