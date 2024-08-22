@@ -11,9 +11,7 @@
 | first_name       | string | null: false |
 | last_name_kana   | string | null: false |
 | first_name_kana  | string | null: false |
-| birth_year       | string | null: false |
-| birth_month      | string | null: false |
-| birth_date       | string | null: false |
+| birth_date       | date   | null: false |
 
 ### Association
 
@@ -22,17 +20,17 @@
 
 ## items テーブル
 
-| Column          | Type       | Options     |
-| --------------- | ---------- | ----------- |
-| item_name       | string     | null: false |
-| description     | text       | null: false |
-| item_category   | string     | null: false |
-| item_status     | string     | null: false |
-| shipping_burden | string     | null: false |
-| shipping_origin | string     | null: false |
-| shipping_date   | string     | null: false |
-| price           | integer    | null: false |
-| user            | references | null: false ,foreign_key: true |
+| Column                  | Type       | Options     |
+| ----------------------- | ---------- | ----------- |
+| item_name               | string     | null: false |
+| description             | text       | null: false |
+| item_category_id        | integer    | null: false |
+| item_status_id          | integer    | null: false |
+| shipping_fee_status_id  | integer    | null: false |
+| prefecture_id           | integer    | null: false |
+| shipping_date_id        | integer    | null: false |
+| price                   | integer    | null: false |
+| user                    | references | null: false ,foreign_key: true |
 
 ### Association
 
@@ -57,7 +55,7 @@
 | Column        | Type       | Options     |
 | ------------- | ---------- | ------------|
 | portal_code   | string     | null: false |
-| prefecture    | string     | null: false |
+| prefecture_id | integer    | null: false |
 | city          | string     | null: false |
 | street_address| string     | null: false |
 | building_name | string     | null: false |
