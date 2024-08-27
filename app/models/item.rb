@@ -9,10 +9,10 @@ class Item < ApplicationRecord
   belongs_to :shipping_date
 
   with_options presence: true do
-  validates :image
-  validates :item_name
-  validates :description
-  validates :price
+    validates :image
+    validates :item_name
+    validates :description
+    validates :price
   end
   with_options numericality: { other_than: 1, message: "can't be blank" } do
     validates :item_category_id
