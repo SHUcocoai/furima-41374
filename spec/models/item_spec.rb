@@ -60,60 +60,58 @@ RSpec.describe Item, type: :model do
       it 'item_category_idが1では出品できない' do
         @item.item_category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item category must be selected")
+        expect(@item.errors.full_messages).to include('Item category must be selected')
       end
       it 'item_status_idが1では出品できない' do
         @item.item_status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item status must be selected")
+        expect(@item.errors.full_messages).to include('Item status must be selected')
       end
       it 'shipping_fee_status_idが1では出品できない' do
         @item.shipping_fee_status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping fee status must be selected")
+        expect(@item.errors.full_messages).to include('Shipping fee status must be selected')
       end
       it 'prefecture_idが1では出品できない' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture must be selected")
+        expect(@item.errors.full_messages).to include('Prefecture must be selected')
       end
       it 'shipping_date_idが1では出品できない' do
         @item.shipping_date_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping date must be selected")
+        expect(@item.errors.full_messages).to include('Shipping date must be selected')
       end
       it 'priceが全角数字では出品できない' do
-        @item.price = "３３３"
+        @item.price = '３３３'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be a half-width number between 300 and 9,999,999")
+        expect(@item.errors.full_messages).to include('Price must be a half-width number between 300 and 9,999,999')
       end
       it 'priceが半角英字では出品できない' do
-        @item.price = "abc"
+        @item.price = 'abc'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be a half-width number between 300 and 9,999,999")
+        expect(@item.errors.full_messages).to include('Price must be a half-width number between 300 and 9,999,999')
       end
       it 'priceが半角英数字混合では出品できない' do
-        @item.price = "123abc"
+        @item.price = '123abc'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be a half-width number between 300 and 9,999,999")
+        expect(@item.errors.full_messages).to include('Price must be a half-width number between 300 and 9,999,999')
       end
       it 'userが紐づいていないと出品できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
       it 'priceが300円未満では出品できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be a half-width number between 300 and 9,999,999")
+        expect(@item.errors.full_messages).to include('Price must be a half-width number between 300 and 9,999,999')
       end
       it 'priceが9,999,999円を超えると出品できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be a half-width number between 300 and 9,999,999")
+        expect(@item.errors.full_messages).to include('Price must be a half-width number between 300 and 9,999,999')
       end
     end
   end
 end
-
- 

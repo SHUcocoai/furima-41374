@@ -28,6 +28,6 @@ class Item < ApplicationRecord
   end
 
   validates :price,
-            numericality: { only_integer: true, greater_than_or_equal_to: 300,less_than_or_equal_to: 9999999,
-            message: 'must be a half-width number between 300 and 9,999,999' }
+            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
+                            message: 'must be a half-width number between 300 and 9,999,999' }
 end
