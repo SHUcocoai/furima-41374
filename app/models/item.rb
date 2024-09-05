@@ -7,6 +7,11 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee_status
   belongs_to :prefecture
   belongs_to :shipping_date
+  has_one :order
+
+  def sold_out?
+    order.present?
+  end
 
   with_options presence: true do
     validates :image

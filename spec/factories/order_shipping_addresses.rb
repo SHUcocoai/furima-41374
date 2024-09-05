@@ -6,5 +6,6 @@ FactoryBot.define do
     street_address { Faker::Address.street_address }
     building_name { '日本ハイツ' }
     phone_number { Faker::Number.leading_zero_number(digits: 11) }
+    token {"tok_abcdefghijk00000000000000000"}
   end
 end
