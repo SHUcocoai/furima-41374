@@ -9,10 +9,6 @@ class Item < ApplicationRecord
   belongs_to :shipping_date
   has_one :order
 
-  def sold_out?
-    order.present?
-  end
-
   with_options presence: true do
     validates :image
     validates :item_name

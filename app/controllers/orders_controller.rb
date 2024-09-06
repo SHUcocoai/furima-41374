@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item
+  before_action :redirect_if_invalid_access, only: [:index, :create]
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @item = Item.find(params[:item_id])
@@ -20,6 +22,21 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find_by(id: params[:item_id])
+    redirect_to root_path, alert: "商品が見つかりません" if @item.nil?
+    end
+
+    def redirect_if_invalid_access
+      if @item.nil?
+        redirect_to root_path
+      elsif current_user.id == @item.user_id
+        redirect_to root_path
+      elsif @item.order.present?
+        redirect_to root_path
+      end
+    end
   def order_shipping_address_params
     params.require(:order_shipping_address).permit(:postal_code, :prefecture_id, :city, :street_address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
   end
