@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe OrderShippingAddress, type: :model do
   before do
     user = FactoryBot.create(:user)
-    item = FactoryBot.create(:item, user: user)
+    item = FactoryBot.create(:item, user:)
     @order_shipping_address = FactoryBot.build(:order_shipping_address, user_id: user.id, item_id: item.id)
   end
 
@@ -13,23 +13,23 @@ RSpec.describe OrderShippingAddress, type: :model do
         expect(@order_shipping_address).to be_valid
       end
       it 'building_nameが空でも保存できる' do
-      @order_shipping_address.building_name = ''
-      expect(@order_shipping_address).to be_valid
+        @order_shipping_address.building_name = ''
+        expect(@order_shipping_address).to be_valid
       end
     end
     context '購入できないとき' do
       it 'postal_codeが空では出品できない' do
-        @order_shipping_address.postal_code  = ''
+        @order_shipping_address.postal_code = ''
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include "Postal code can't be blank"
       end
       it 'prefecture_idが空では出品できない' do
         @order_shipping_address.prefecture_id = ''
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include "Prefecture must be selected"
+        expect(@order_shipping_address.errors.full_messages).to include 'Prefecture must be selected'
       end
       it 'cityが空では出品できない' do
-        @order_shipping_address.city  = ''
+        @order_shipping_address.city = ''
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include "City can't be blank"
       end
@@ -61,17 +61,17 @@ RSpec.describe OrderShippingAddress, type: :model do
       it 'phone_numberが10桁以上11桁以内でないと出品できない' do
         @order_shipping_address.phone_number = '090123456789'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include "Phone number enter a half-width number between 10 and 11 digits."
+        expect(@order_shipping_address.errors.full_messages).to include 'Phone number enter a half-width number between 10 and 11 digits.'
       end
       it 'phone_numberが半角でないと出品できない' do
         @order_shipping_address.phone_number = '０９０１２３４５６７８'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include "Phone number enter a half-width number between 10 and 11 digits."
+        expect(@order_shipping_address.errors.full_messages).to include 'Phone number enter a half-width number between 10 and 11 digits.'
       end
       it 'phone_numberが数値でないと出品できない' do
         @order_shipping_address.phone_number = '09-123-5678'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include "Phone number enter a half-width number between 10 and 11 digits."
+        expect(@order_shipping_address.errors.full_messages).to include 'Phone number enter a half-width number between 10 and 11 digits.'
       end
       it 'userが紐づいていないと出品できない' do
         @order_shipping_address.user_id = nil
@@ -90,4 +90,4 @@ RSpec.describe OrderShippingAddress, type: :model do
       end
     end
   end
-end  
+end

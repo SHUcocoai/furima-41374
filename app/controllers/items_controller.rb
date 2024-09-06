@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
     if @item.user_id == current_user.id
       @item.destroy
       redirect_to root_path
-    else 
+    else
       redirect_to item_path(@item)
     end
   end
@@ -57,8 +57,8 @@ class ItemsController < ApplicationController
   end
 
   def redirect_if_not_editable
-    if @item.order.present? || current_user.id != @item.user_id
-      redirect_to root_path
-    end
+    return unless @item.order.present? || current_user.id != @item.user_id
+
+    redirect_to root_path
   end
 end
